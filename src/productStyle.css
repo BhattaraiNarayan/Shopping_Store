@@ -1,0 +1,211 @@
+/* Removing Default Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+}
+
+/**
+* !navbar styles start here
+**/
+.top_txt {
+    background-color: var(--buttonColor);
+    color: var(--backgroundColor);
+
+    & .head_txt p {
+        font-size: 1.5rem;
+    }
+
+    & .sing_in_up {
+        display: flex;
+        gap: 3.2rem;
+    }
+}
+
+.section-navbar {
+    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+        rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+}
+
+.section-navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.8rem;
+    /* we override the main container padding property  */
+}
+
+.section-navbar img {
+    width: 25%;
+}
+
+.section-navbar .navbar ul {
+    display: flex;
+    gap: 3.2rem;
+    text-transform: capitalize;
+    align-items: center;
+
+    & li a {
+        color: var(--heading-color);
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 1.6rem;
+        display: inline-block;
+        position: relative;
+
+        &:after {
+            content: "";
+            position: absolute;
+            bottom: -0.3rem;
+            left: 0;
+            width: 0%;
+            border-bottom: 0.1rem solid var(--main-color);
+            transition: all 0.3s linear;
+        }
+    }
+
+    & li a:hover {
+        color: var(--main-color);
+    }
+
+    & li a:hover:after {
+        width: 100%;
+    }
+}
+
+/**
+*! Style rules for label and some buttons
+**/
+.text-center {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.HomeBtn {
+    background-color: #212529;
+    color: white;
+    border: none;
+    padding: 6px;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+/* Sidebar css code starts here */
+.sidebar {
+    display: flex;
+    padding: 10px;
+}
+.leftMenu {
+    flex: 1;
+}
+
+.search {
+    padding: 10px;
+    width: 250px;
+    border: 2px solid gray;
+}
+
+h1 {
+    font-size: 30px;
+    color: #555;
+    font-weight: 300;
+}
+
+
+.cats {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.cat {
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 700;
+    padding: 5px;
+}
+
+.content {
+    flex: 4;
+}
+
+.products {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.product {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    border: 2px solid #212529;
+    object-fit: contain;
+}
+
+.name {
+    font-size: 24px;
+}
+.desc{
+    font-size: 18px;
+}
+.price{
+    display: flex;
+    font-size: 20px;
+}
+.price-quantity {
+    font-size: 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 28px;
+}
+.buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+}
+.category-item{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-decoration: underline;
+}
+.bi-dash-lg {
+    color: red;
+}
+
+.bi-plus-lg {
+    color: green;
+}
+
+i {
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+
+
+/* sidebar css code ends here */
+
+@media (max-width:1000px) {
+    .shop {
+        grid-template-columns: repeat(2, 220px);
+    }
+}
+
+@media (max-width:600px) {
+    .shop {
+        grid-template-columns: repeat(1, 220px);
+    }
+}

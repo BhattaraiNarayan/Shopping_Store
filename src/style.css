@@ -628,6 +628,7 @@ a {
     font-size: 20px;
     font-weight: bold;
 }
+
 @keyframes circle {
     0% {
         background-color: #b3d0ff;

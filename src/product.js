@@ -23,9 +23,9 @@ alt=""
 <div class="price-quantity">
 <span>¥ ${price}</span>
 <div class="buttons">
-      <i onclick="decrement(${id})"  class="bi bi-dash-lg"></i>
-      <div id=${id} class="quantity">0</div>
-       <i onclick="increment(${id})" class="bi bi-plus-lg"></i>
+     <i id="myButton1" data-id="${id}" class="bi bi-dash-lg decrementButton"></i>
+      <div id="myButton" data-id="${id}"class="quantity">0</div>
+       <i id="myButton" data-id="${id}" class="bi bi-plus-lg incrementButton"></i>
 </div>
 </div>
 </div>
@@ -73,7 +73,63 @@ const setCategories = () => {
         );
   });
 };
-
 setCategories();
 
 
+
+let increment = (event) => {
+  let id = event.target.getAttribute("data-id");
+  let search = basket.find((x) => x.id === id);
+  if (search === undefined) {
+    basket.push({
+      id: id,
+      quantity: 1,
+    });
+  } else {
+    search.quantity += 1;
+  }
+  update(id);
+};
+
+// Get all elements with the class "incrementButton"
+let incrementButtons = document.querySelectorAll(".incrementButton");
+
+// Add the event listener to each button
+incrementButtons.forEach((x) => {
+  x.addEventListener("click", increment);
+});
+
+
+let decrement = (event) => {
+  let id = event.target.getAttribute("data-id");
+  let search = basket.find((x) => x.id === id);
+  if (search.quantity === 0) return;
+  else {
+    search.quantity -= 1;
+      if (search.quantity < 0) {
+        search.quantity = 0; // Ensure quantity doesn't go below zero
+      }
+  }
+  update(id);
+};
+// Get all elements with the class "incrementButton"
+let decrementButtons = document.querySelectorAll(".decrementButton");
+
+// Add the event listener to each button
+decrementButtons.forEach((x) => {
+  x.addEventListener("click", decrement);
+});
+
+
+let update=(id)=>{
+  let search = basket.find((x) => x.id === id);
+  let quantity = document.querySelector(`div[data-id="${id}"]`);
+  quantity.innerHTML = search.quantity;
+  calculation();
+};
+
+let calculation = () => {
+  let cartIcon=document.getElementById("cartAmount");
+  cartIcon.innerHTML = basket.map((x)=>x.quantity).reduce((x,y) => x+y, 0);
+
+};

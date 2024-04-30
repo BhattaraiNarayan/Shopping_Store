@@ -4,13 +4,15 @@ let productsContainer = document.querySelector(".products");
 let searchInput = document.querySelector(".search");
 let categoriesContainer = document.querySelector(".cats");
 
-let basket=[];
+
+let basket = JSON.parse(localStorage.getItem("data")) || [];
+
 
 let displayProducts = (filteredProducts) => {
   productsContainer.innerHTML = filteredProducts
-    .map((item) =>{
-        let { id, name, price, desc, img } = item;
-        let search = basket.find((x) => x.id === id) || [];
+    .map((x) =>{
+        let { id, name, price, desc, img } = x;
+            let search = basket.find((x) => x.id === id) || {};
         return `
 <div id=product-id-${id} class="product"> 
 <img
@@ -24,7 +26,9 @@ alt=""
 <span>¥ ${price}</span>
 <div class="buttons">
      <i id="myButton1" data-id="${id}" class="bi bi-dash-lg decrementButton"></i>
-      <div id="myButton" data-id="${id}"class="quantity">0</div>
+      <div id=${id} data-id="${id}" class="quantity">
+        ${search.quantity === undefined ? 0 : search.quantity}
+      </div>
        <i id="myButton" data-id="${id}" class="bi bi-plus-lg incrementButton"></i>
 </div>
 </div>
@@ -88,12 +92,13 @@ let increment = (event) => {
   } else {
     search.quantity += 1;
   }
+  localStorage.setItem("data", JSON.stringify(basket));
+    
   update(id);
 };
 
 // Get all elements with the class "incrementButton"
 let incrementButtons = document.querySelectorAll(".incrementButton");
-
 // Add the event listener to each button
 incrementButtons.forEach((x) => {
   x.addEventListener("click", increment);
@@ -110,26 +115,24 @@ let decrement = (event) => {
         search.quantity = 0; // Ensure quantity doesn't go below zero
       }
   }
+localStorage.setItem("data", JSON.stringify(basket));     
   update(id);
 };
 // Get all elements with the class "incrementButton"
 let decrementButtons = document.querySelectorAll(".decrementButton");
-
 // Add the event listener to each button
 decrementButtons.forEach((x) => {
   x.addEventListener("click", decrement);
 });
 
-
-let update=(id)=>{
+let update = (id) => {
   let search = basket.find((x) => x.id === id);
-  let quantity = document.querySelector(`div[data-id="${id}"]`);
-  quantity.innerHTML = search.quantity;
+  document.getElementById(id).innerHTML = search.quantity;
   calculation();
 };
 
 let calculation = () => {
   let cartIcon=document.getElementById("cartAmount");
   cartIcon.innerHTML = basket.map((x)=>x.quantity).reduce((x,y) => x+y, 0);
-
 };
+calculation();

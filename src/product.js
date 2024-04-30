@@ -26,9 +26,7 @@ alt=""
 <span>¥ ${price}</span>
 <div class="buttons">
      <i id="myButton1" data-id="${id}" class="bi bi-dash-lg decrementButton"></i>
-      <div id=${id} data-id="${id}" class="quantity">
-        ${search.quantity === undefined ? 0 : search.quantity}
-      </div>
+      <div id=${id} data-id="${id}" class="quantity">0</div>
        <i id="myButton" data-id="${id}" class="bi bi-plus-lg incrementButton"></i>
 </div>
 </div>

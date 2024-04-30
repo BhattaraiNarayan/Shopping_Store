@@ -12,7 +12,7 @@ let displayProducts = (filteredProducts) => {
   productsContainer.innerHTML = filteredProducts
     .map((x) =>{
         let { id, name, price, desc, img } = x;
-            let search = basket.find((x) => x.id === id) || {};
+            let search = basket.find((x) => x.id === id) || [];
         return `
 <div id=product-id-${id} class="product"> 
 <img

@@ -2,6 +2,13 @@ let shop = document.querySelector("#shop");
 
 let basket = JSON.parse(localStorage.getItem("data")) || [];
 
+let calculation = () => {
+  let cartIcon = document.getElementById("cartAmount");
+  cartIcon.innerHTML = basket.map((x) => x.quantity).reduce((x, y) => x + y, 0);
+};
+calculation();
+
+
 let generateShop = () => {
   return (shop.innerHTML = shopData
     .map((item) => {
